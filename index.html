@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold
+      }
+      .header {
+        padding: 32px
+      }
+      .pet-name {
+        font-size: 32px
+      }
+      .pet-image {
+        height: 500px;
+        max-width: 80%;
+        padding: 32px
+      }
+      .main {
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+      }
+      .image-area {
+        background-color: blue;
+        display: grid;
+        justify-items: center;
+      }
+      .interactive-area {
+        background-color: orange;
+      }
+      .activity-icon {
+        height: 60px;
+        height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="pet-name">Pulpito</div>
+      <div class="description">She can change colors and loves to dance.</div>
+    </div>
+    <div class="main">
+      <div class="image-area">
+        <img class="pet-image" src='neutral.gif' />
+      </div>
+      <div class="interactive-area">
+
+      <div class="activity-row">
+        <img class="activity-icon" src="food.gif" />
+        <div> class="activity-stat">100</div>
+        <div> class="activity-button"</div>
+      </div>
+      <div class="activity-row">
+        <img class="activity-icon" src="water.gif" />
+        <div> class="activity-stat">50</div>
+        <div> class="activity-button"</div>
+      </div>
+      <div class="activity-row">
+        <img class="activity-icon" src="exercise.gif" />
+        <div> class="activity-stat">5</div>
+        <div> class="activity-button"</div>
+      </div>
+
+      </div>
+    </div>
+  </body>
+</html>
