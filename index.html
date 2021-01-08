@@ -10,7 +10,8 @@
         padding: 32px
       }
       .pet-name {
-        font-size: 32px
+        font-size: 32px;
+        color: purple
       }
       .pet-image {
         height: 500px;
@@ -22,47 +23,174 @@
         grid-template-columns: 1fr 1fr; 
       }
       .image-area {
-        background-color: blue;
+        background-color: rgb(240, 199, 86);
         display: grid;
         justify-items: center;
       }
       .interactive-area {
-        background-color: orange;
+        background-color: rgb(105, 201, 201);
+        font-size: 25px;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+      }
+      .activity-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: 90%;
+        padding: 0 1rem;
+        align-items: center;
       }
       .activity-icon {
-        height: 60px;
-        height: 60px;
+        height: 70px;
+        height: 70px;
       }
+      .activity-button {
+        background-color: rgb(240, 199, 86);
+        border-radius: 8px;
+        box-shadow: 0 0 5px 0 grey;
+        color: black;
+        cursor: pointer;
+        height: 100%;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+      }
+      .hidden {
+        display: none;
+      }
+      .end-game {
+        justify-items: center;
+        padding: 50 px;
+      }
+
     </style>
+
   </head>
   <body>
     <div class="header">
       <div class="pet-name">Pulpito</div>
-      <div class="description">She can change colors and loves to dance.</div>
+      <div class="description">I will morph depending on how I'm feeling, can you help me keep dancing?</div>
     </div>
     <div class="main">
       <div class="image-area">
-        <img class="pet-image" src='neutral.gif' />
+        <img id="pet-image" class="pet-image" src='neutral.gif' />
       </div>
       <div class="interactive-area">
 
-      <div class="activity-row">
+      <div id="food-row" class="activity-row">
         <img class="activity-icon" src="food.gif" />
-        <div> class="activity-stat">100</div>
-        <div> class="activity-button"</div>
+        <div id="food-stat" class="activity-stat"> 60 </div>
+        <div class="activity-button" onclick="giveFood()"> Crab Snacks</div>
       </div>
-      <div class="activity-row">
+
+      <div id="water-row" class="activity-row">
         <img class="activity-icon" src="water.gif" />
-        <div> class="activity-stat">50</div>
-        <div> class="activity-button"</div>
+        <div id=water-stat class="activity-stat"> 60 </div>
+        <div class="activity-button" onclick="giveWater()" >Juice</div>
       </div>
-      <div class="activity-row">
+
+      <div id="exercise-row" class="activity-row">
         <img class="activity-icon" src="exercise.gif" />
-        <div> class="activity-stat">5</div>
-        <div> class="activity-button"</div>
+        <div id="exercise-stat" class="activity-stat"> 60 </div>
+        <div class="activity-button" onclick="giveExercise()" >Dancing Tunes</div>
+      </div>
+
+      <div id="end-game" class="end-game hidden">
+        <div class="message">
+          Pulpito has passed out.
+        </div>
+        <div class="activity-button restart-button" onclick="restart()">
+          Restart
+        </div>
       </div>
 
       </div>
     </div>
   </body>
+
+  <script>
+
+var hasNotPassedOut = true
+
+var food = 60
+var water = 60
+var exercise = 60
+
+var giveFood = () => {
+  food = food + 15
+  water = water - 5
+  exercise = exercise - 5
+
+  updateHTML()
+  }
+
+var giveWater = () => {
+  water = water + 15
+  food = food - 5
+  exercise = exercise - 2
+
+  updateHTML()
+}
+
+var giveExercise = () => {
+  exercise = exercise + 30
+  water = water - 15
+  food = food - 10
+
+  updateHTML()
+}
+
+var updateHTML = () => {
+      document.getElementById("food-stat").innerHTML = food
+      document.getElementById("water-stat").innerHTML = water
+      document.getElementById("exercise-stat").innerHTML = exercise
+
+      var lowestStat = Math.min(food, water, exercise)
+      var imageSrc 
+
+      if (lowestStat <= 0) {
+        imageSrc = 'passed-out.gif'
+        if (hasNotPassedOut) {
+          toggleInteractivity()
+          hasNotPassedOut = false
+        }
+      } else if (lowestStat < 25) {
+        imageSrc = 'tired.gif'
+      } else if (lowestStat < 75) {
+        imageSrc = 'neutral.gif'
+      } else if (lowestStat < 110) {
+        imageSrc = 'upbeat.gif'
+      } else {
+        imageSrc = 'exuberant.gif'
+      }
+      document.getElementById("pet-image").src = imageSrc
+    }
+
+    var agePet = () => {
+      water = water - 8
+      food = food - 4
+      exercise = exercise -2
+      updateHTML ()
+    }
+    
+    setInterval(agePet, 3000)
+
+    var toggleInteractivity = () => {
+      document.getElementById("food-row").classList.toggle("hidden")
+      document.getElementById("water-row").classList.toggle("hidden")
+      document.getElementById("exercise-row").classList.toggle("hidden")
+      document.getElementById("end-game").classList.toggle("hidden")
+    }
+
+    var restart = () => {
+      food = 60
+      water = 60
+      exercise = 60
+      hasNotPassedOut = true
+      toggleInteractivity()
+      updateHTML()
+    }
+
+  </script>
 </html>
