@@ -70,7 +70,7 @@
   <body>
     <div class="header">
       <div class="pet-name">Pulpito</div>
-      <div class="description">I will morph depending on how I'm feeling, can you help me keep dancing?</div>
+      <div class="description">I will morph depending on how I'm feeling, can you keep me dancing?</div>
     </div>
     <div class="main">
       <div class="image-area">
@@ -87,7 +87,7 @@
       <div id="water-row" class="activity-row">
         <img class="activity-icon" src="water.gif" />
         <div id=water-stat class="activity-stat"> 60 </div>
-        <div class="activity-button" onclick="giveWater()" >Juice</div>
+        <div class="activity-button" onclick="giveWater()" >Drinks</div>
       </div>
 
       <div id="exercise-row" class="activity-row">
@@ -118,9 +118,9 @@ var water = 60
 var exercise = 60
 
 var giveFood = () => {
-  food = food + 15
-  water = water - 5
-  exercise = exercise - 5
+  food = food + 30
+  water = water - 15
+  exercise = exercise - 10
 
   updateHTML()
   }
@@ -128,15 +128,15 @@ var giveFood = () => {
 var giveWater = () => {
   water = water + 15
   food = food - 5
-  exercise = exercise - 2
+  exercise = exercise - 5
 
   updateHTML()
 }
 
 var giveExercise = () => {
-  exercise = exercise + 30
-  water = water - 15
-  food = food - 10
+  exercise = exercise + 15
+  water = water - 5
+  food = food - 2
 
   updateHTML()
 }
@@ -155,11 +155,11 @@ var updateHTML = () => {
           toggleInteractivity()
           hasNotPassedOut = false
         }
-      } else if (lowestStat < 25) {
+      } else if (lowestStat < 15) {
         imageSrc = 'tired.gif'
       } else if (lowestStat < 75) {
         imageSrc = 'neutral.gif'
-      } else if (lowestStat < 110) {
+      } else if (lowestStat < 100) {
         imageSrc = 'upbeat.gif'
       } else {
         imageSrc = 'exuberant.gif'
@@ -168,9 +168,9 @@ var updateHTML = () => {
     }
 
     var agePet = () => {
-      water = water - 8
-      food = food - 4
-      exercise = exercise -2
+      water = water - 4
+      food = food - 2
+      exercise = exercise - 8
       updateHTML ()
     }
     
